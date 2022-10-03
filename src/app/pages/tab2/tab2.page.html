@@ -1,8 +1,6 @@
 <ion-header [translucent]="true" mode="ios" class="ion-no-border">
   <ion-toolbar>
-    <ion-title>
-      Encabezados
-    </ion-title>
+    <ion-title> Encabezados </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,7 +11,12 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-segment [value]="selectedCategory" (ionChange)="segmentChanged($event)" scrollable mode="md">
+  <ion-segment
+    [value]="selectedCategory"
+    (ionChange)="segmentChanged($event)"
+    scrollable
+    mode="md"
+  >
     <ion-segment-button [value]="category" *ngFor="let category of categories">
       <ion-label class="ion-text-capitalize">{{ category }}</ion-label>
     </ion-segment-button>
@@ -21,5 +24,15 @@
 
   <app-articles [articles]="articles"></app-articles>
 
-
+  <ion-infinite-scroll
+    threshold="25%"
+    position="bottom"
+    (ionInfinite)="loadData()"
+  >
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Cargando..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
